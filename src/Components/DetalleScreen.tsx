@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Image, StyleSheet, Dimensions, ScrollView, Text, ActivityIndicator } from 'react-native';
+import { View, Image, StyleSheet, Dimensions, ScrollView, Text, ActivityIndicator, Pressable } from 'react-native';
 import { Movie } from '../Interfaces/now_playing.interface';
 import { useDetails } from '../Hooks/useDetails';
 import MovieDetail from '../Commons/MovieDetail.component';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default function DetalleScreen({ route }: any) {
+export default function DetalleScreen({ route, navigation }: any) {
   const movie = route.params as Movie;
   const url_image = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
   const { width, height } = Dimensions.get('screen');
@@ -47,9 +47,11 @@ export default function DetalleScreen({ route }: any) {
     background: {
       marginBottom: 30,
     },
-    arrow:{
-      position:'absolute',
-    }
+    arrow: {
+      position: 'absolute',
+      top: 20,
+      left: 10,
+    },
   });
 
 
@@ -69,12 +71,16 @@ export default function DetalleScreen({ route }: any) {
         ? <ActivityIndicator color={'light-blue'} size={30} />
         : <MovieDetail cast={cast} fullMovie={fullMovie!} />
       }
-      <Icon
-        name={'angle-left'}
-        size={30}
-        color={'white'}
+      <Pressable
         style={styles.arrow}
-      />
+        onPress={() => navigation.pop()}
+      >
+        <Icon
+          name={'chevron-circle-left'}
+          size={30}
+          color={'white'}
+        />
+      </Pressable>
     </ScrollView>
   );
 }
