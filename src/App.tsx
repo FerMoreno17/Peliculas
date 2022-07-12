@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import Navigator from './Navigation/Navigator';
 import { GradientProvider } from './context/GradientContext';
+import SplashScreen from 'react-native-splash-screen';
 
 const AppState = ({ children }: any) => {
   return (
@@ -12,6 +13,10 @@ const AppState = ({ children }: any) => {
 };
 
 const App = () => {
+  React.useEffect(() => {
+    SplashScreen.hide();
+  });
+
   return (
     <NavigationContainer>
       <AppState>

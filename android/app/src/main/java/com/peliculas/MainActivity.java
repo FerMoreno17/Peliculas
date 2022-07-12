@@ -1,4 +1,6 @@
 package com.peliculas;
+import android.os.Bundle; // here
+import org.devio.rn.splashscreen.SplashScreen; // here
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
@@ -15,6 +17,12 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "Peliculas";
   }
+
+  @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        SplashScreen.show(this);  // here
+        super.onCreate(savedInstanceState);
+    }
 
   /**
    * Returns the instance of the {@link ReactActivityDelegate}. There the RootView is created and
@@ -38,9 +46,4 @@ public class MainActivity extends ReactActivity {
       return reactRootView;
     }
   }
-
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(null);
-}
 }
